@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>計算機</title>
+</head>
+<style>
+  .button
+  {
+    background-color:#99ffff;
+    width: 40px;
+  }
+
+  .button:hover{
+    background:#82ae46;
+  }
+
+  .button:active{
+  background: #69821b;
+  }
+
+</style>
+<script>
+
+  function allClear(){ //計算過程を全消去
+     var calcProcessObj = document.getElementById("calcProcess");
+     calcProcessObj.value = "";
+  }
+
+  function input(inputWord){ //数字と演算子を入力する
+    var calcProcessObj = document.getElementById("calcProcess");
+    calcProcessObj.value += inputWord ;
+  }
+
+  function calculationView(){ //計算結果を表示する
+    var calcResultObj = document.getElementById("calcResult");
+    var calc_string = document.getElementById("calcProcess").value;
+    calcResultObj.value = safeEval(calc_string);
+  }
+
+  function safeEval(calc_string){ //計算過程欄の計算式を評価する
+    return Function('"use strict";return (' + calc_string  + ')')();
+  }
+
+  function backSpace(){ //計算過程の末尾を消去する
+    var calcProcessObj = document.getElementById("calcProcess");
+      calcProcessObj.value = calcProcessObj.value.slice(0,-1);
+  }
+
+</script>
+<body>
+  <p><input type="text" id="calcResult" readonly></p>
+  <p><input type="text" id="calcProcess" readonly></p>
+  <div class="allButton">
+    <div>
+      <input type="button" name="button" class="button" value="C" onclick="allClear();">
+      <input type="button" name="button" class="button" value="BS"onclick="backSpace();">
+      <input type="button" name="button" class="button" value="%" onclick="input('%');">
+      <input type="button" name="button" class="button" value="/" onclick="input('/');">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="7" onclick="input(7)">
+      <input type="button" name="button" class="button" value="8" onclick="input(8)">
+      <input type="button" name="button" class="button" value="9" onclick="input(9)">
+      <input type="button" name="button" class="button" value="*" onclick="input('*')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="4" onclick="input(4)">
+      <input type="button" name="button" class="button" value="5" onclick="input(5)">
+      <input type="button" name="button" class="button" value="6" onclick="input(6)">
+      <input type="button" name="button" class="button" value="-" onclick="input('-')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="1" onclick="input(1)">
+      <input type="button" name="button" class="button" value="2" onclick="input(2)">
+      <input type="button" name="button" class="button" value="3" onclick="input(3)">
+      <input type="button" name="button" class="button" value="+" onclick="input('+')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="0" onclick="input(0)">
+      <input type="button" name="button" class="button" value="00"onclick="input(0), input(0)" >
+      <input type="button" name="button" class="button" value="." onclick="input('.')">
+      <input type="button" name="button" class="button" value="=" onclick="calculationView();">
+    </div>
+  </div>
+  <ul>
+    <li>ボタンにカーソルを合わせると変色する。</li>
+    <li>ボタン押下時に凹む。</li>
+    <li>四則演算に加えて剰余算ができる。</li>
+    <li>バックスペース、クリアができる。</li>
+  </ul>
+</body>
+</html>

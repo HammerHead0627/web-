@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<style>
+  .button
+  {
+    background-color:#99ffff;
+  }
+
+  .button:hover{
+    background:#82ae46;
+  }
+
+  .button:active{
+  background: #69821b;
+}
+
+</style>
+<script>
+  function allClear(){
+    var calcProcessObj = document.getElementById("calcProcess");
+     calcProcessObj.value = "";
+  }
+
+  function input(inputWord){
+    var calcProcessObj = document.getElementById("calcProcess");
+    calcProcessObj.value += inputWord ;
+  }
+
+  function calculate(){
+    var calcResultObj = document.getElementById("calcResult");
+    var calc_string = document.getElementById("calcProcess").value;
+    calcResultObj.value = safeEval(calc_string);
+  }
+
+  function safeEval(calc_string){
+    return Function('"use strict";return (' + calc_string  + ')')();
+  }
+
+</script>
+<body>
+  <p><input type="text" id="calcResult" readonly></p>
+  <p><input type="text" id="calcProcess"></p>
+  <div class="allButton">
+    <div>
+      <input type="button" name="button" class="button" value="C" onclick="allClear();">
+      <input type="button" name="button" class="button" value="BS"onclick="backSpace();">
+      <input type="button" name="button" class="button" value="%" onclick="input('%');">
+      <input type="button" name="button" class="button" value="/" onclick="input('/');">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="7" onclick="input(7)">
+      <input type="button" name="button" class="button" value="8" onclick="input(8)">
+      <input type="button" name="button" class="button" value="9" onclick="input(9)">
+      <input type="button" name="button" class="button" value="*" onclick="input('*')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="4" onclick="input(4)">
+      <input type="button" name="button" class="button" value="5" onclick="input(5)">
+      <input type="button" name="button" class="button" value="6" onclick="input(6)">
+      <input type="button" name="button" class="button" value="-" onclick="input('-')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="1" onclick="input(1)">
+      <input type="button" name="button" class="button" value="2" onclick="input(2)">
+      <input type="button" name="button" class="button" value="3" onclick="input(3)">
+      <input type="button" name="button" class="button" value="+" onclick="input('+')">
+    </div>
+    <div>
+      <input type="button" name="button" class="button" value="0" onclick="input(0)">
+      <input type="button" name="button" class="button" value="00"onclick="input()">
+      <input type="button" name="button" class="button" value="." onclick="input('.')">
+      <input type="button" name="button" class="button" value="=" onclick="calculate();">
+    </div>
+  </div>
+</body>
+</html>
